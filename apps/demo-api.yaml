@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-api
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/Norvio/charts.git
+      targetRevision: main
+      path: service
+      helm:
+        releaseName: demo-api
+        valueFiles:
+          - $values/values/demo-api.yaml
+    - repoURL: https://github.com/Norvio/gitops.git
+      targetRevision: main
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: demo
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

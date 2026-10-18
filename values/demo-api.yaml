@@ -1,0 +1,5 @@
+image:
+  repository: ghcr.io/norvio/demo-api
+  tag: sha-81be94979a37722ca920b6a43792735e91872523
+
+replicaCount: 2
